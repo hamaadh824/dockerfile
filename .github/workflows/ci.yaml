@@ -1,1 +1,33 @@
+name: Build and Push Docker Image
 
+on:
+  push:
+    branches:
+      - main  
+      
+jobs:
+  build:
+    runs-on: gitlab-linux
+
+steps:
+      # Step 1: Repo ka code checkout karo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Azure me login karo (Service Principal se)
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Step 3: ACR login
+      - name: Azure Container Registry Login
+        run: az acr login --name AcrTemp1
+
+      # Step 4: Docker image build karo
+      - name: Build Docker Image
+        run: docker build -t AcrTemp1.azurecr.io/myapp:latest .
+
+      # Step 5: Docker image ko ACR me push karo
+      - name: Push Docker Image
+        run: docker push AcrTemp1.azurecr.io/myapp:latest
