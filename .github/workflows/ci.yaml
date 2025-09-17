@@ -8,13 +8,12 @@ on:
 jobs:
   build:
     runs-on: gitlab-linux
-
-steps:
+    steps:
       # Step 1: Repo ka code checkout karo
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Azure me login karo (Service Principal se)
+      # Step 2: Azure login
       - name: Azure Login
         uses: azure/login@v1
         with:
@@ -24,10 +23,10 @@ steps:
       - name: Azure Container Registry Login
         run: az acr login --name AcrTemp1
 
-      # Step 4: Docker image build karo
+      # Step 4: Docker image build 
       - name: Build Docker Image
         run: docker build -t AcrTemp1.azurecr.io/myapp:latest .
 
-      # Step 5: Docker image ko ACR me push karo
+      # Step 5: Docker image push to ACR
       - name: Push Docker Image
         run: docker push AcrTemp1.azurecr.io/myapp:latest
