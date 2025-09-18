@@ -20,17 +20,16 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Step 3: ACR login (using sudo)
+      # Step 3: ACR login
       - name: ACR Login
-        run: az acr login --name AcrTemp1
-
+        run: az acr login --name acrtemp1
 
       # Step 4: Build Docker Image
       - name: Build Docker Image
         run: |
-          docker build -t AcrTemp1.azurecr.io/myapp:latest .
+          docker build -t acrtemp1.azurecr.io/myapp:latest .
 
       # Step 5: Push Docker Image to ACR
       - name: Push Docker Image
         run: |
-          docker push AcrTemp1.azurecr.io/myapp:latest
+          docker push acrtemp1.azurecr.io/myapp:latest
