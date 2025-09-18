@@ -21,8 +21,9 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Step 3: ACR login (using sudo)
-      - name: Azure Container Registry Login
-        run: sudo az acr login --name AcrTemp1
+      - name: ACR Login
+        run: az acr login --name AcrTemp1
+
 
       # Step 4: Build Docker Image (using sudo)
       - name: Build Docker Image
