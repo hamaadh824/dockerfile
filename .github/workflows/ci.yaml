@@ -25,11 +25,12 @@ jobs:
         run: az acr login --name AcrTemp1
 
 
-      # Step 4: Build Docker Image (using sudo)
-      - name: Push image to ACR
+      # Step 4: Build Docker Image
+      - name: Build Docker Image
+        run: |
+          docker build -t AcrTemp1.azurecr.io/myapp:latest .
+
+      # Step 5: Push Docker Image to ACR
+      - name: Push Docker Image
         run: |
           docker push AcrTemp1.azurecr.io/myapp:latest
-
-      # Step 5: Push Docker Image to ACR (using sudo)
-      - name: Push Docker Image
-        run: sudo docker push AcrTemp1.azurecr.io/myapp:latest
