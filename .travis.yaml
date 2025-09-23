@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "18"
+
+before_install:
+  - npm install -g @angular/cli
+
+install:
+  - npm install
+
+script:
+  - ng build --configuration production
