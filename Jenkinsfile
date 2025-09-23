@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "my-angular-app"
         IMAGE_TAG = "latest"
-        ACR_LOGIN_SERVER = "myregistry.azurecr.io"  // Replace with your ACR login server
+        ACR_LOGIN_SERVER = "acrtemp1.azurecr.io"  // Replace with your ACR login server
     }
 
     stages {
