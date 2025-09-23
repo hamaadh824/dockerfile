@@ -51,7 +51,7 @@ jobs:
     # Deploy with Helm
     - name: Deploy to AKS with Helm
       run: |
-        helm upgrade --install myapp ./myapp \
+        helm upgrade --install myapp ./manifests \
           --namespace default \
           --set image.repository=acrtemp1.azurecr.io/myapp \
           --set image.tag=${{ github.sha }} \
