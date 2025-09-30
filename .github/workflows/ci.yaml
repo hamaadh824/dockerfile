@@ -13,7 +13,16 @@ jobs:
     # Code checkout
     - name: Checkout code
       uses: actions/checkout@v3
-
+    - name: SonarQube Scan
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      run: |
+        ./gradlew sonarqube \
+          -Dsonar.projectKey=myapp \
+          -Dsonar.host.url=$SONAR_HOST_URL \
+          -Dsonar.login=$SONAR_TOKEN
+          
     # Azure login
     - name: Azure CLI login
       uses: azure/login@v1
