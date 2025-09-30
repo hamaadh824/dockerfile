@@ -13,16 +13,24 @@ jobs:
     # Code checkout
     - name: Checkout code
       uses: actions/checkout@v3
+
+    # Install sonar-scanner (NEW)
+    - name: Install sonar-scanner
+      run: npm install -g sonar-scanner
+
+    # SonarQube Scan (UPDATED)
     - name: SonarQube Scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       run: |
-        ./gradlew sonarqube \
+        sonar-scanner \
           -Dsonar.projectKey=myapp \
+          -Dsonar.sources=src \
+          -Dsonar.exclusions=**/*.spec.ts \
           -Dsonar.host.url=$SONAR_HOST_URL \
           -Dsonar.login=$SONAR_TOKEN
-          
+
     # Azure login
     - name: Azure CLI login
       uses: azure/login@v1
